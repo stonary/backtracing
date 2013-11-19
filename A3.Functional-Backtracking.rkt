@@ -13,7 +13,7 @@
     [_ (fail)]))
 
 #| A two-element list with first element from list `A`, second from list `B`. |#
-(define (pair-of A B) (void))
+(define (pair-of A B) (list (an-element A) (an-element B)))
 
 #| The list `ℓ` with `e` inserted somewhere. |#
 (define (with ℓ e)
@@ -22,8 +22,12 @@
 #| A list of the elements of list `ℓ` in some order.
    Hint: use `with`. |#
 (define (shuffled ℓ)
-  (void))
+  (if (empty? ℓ) (list)
+      (with (shuffled (rest ℓ)) (first ℓ))))
 
 #| A prime factor of positive natural number `n`, including repetitions. |#
 (define (prime-factor n [d 2]) ; [d 2] means a default argument of 2 for `d`.
-  (void))
+  (if (modulo n d)
+      (-< d (prime-factor (/ n d)))
+      ; may need to put things in a queue...
+      (prime-factor )))
