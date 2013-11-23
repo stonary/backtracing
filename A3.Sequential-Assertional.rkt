@@ -1,4 +1,7 @@
 #lang racket
+
+; AUTHORS: g2hushi, g2husath
+
 (provide coin coin-bounded change-bounded change)
 #| Implement the above backtrackable functions.
 
@@ -36,15 +39,12 @@
 (define (change n) (change-bounded n 200))
 
 (module+ test
-  (displayln "testing assert:")
-  (assert #t)
-  #;(assert #f)
   (displayln "testing coin:")
-  (coin) (?) (?) (?) (?) (?) 
+  (list-all (coin))
   (displayln "testing bounded coin:")
-  (coin-bounded 100) (?) (?) (?) (?)
+  (list-all (coin-bounded 100))
   
-  (displayln "testing change-bounded: 200 with <= 100 changes")
-  (change-bounded 200 110) (?) (?) (?) (?) (?) (?) (?) (?) (?) 
+  (displayln "testing change-bounded: 200 with <= 25 changes")
+  (list-all (change-bounded 200 25)) 
   
   (equal? 450 (length (list-all (change 325)))))

@@ -1,5 +1,8 @@
 #lang racket
-#;(provide an-element sub-list shuffled)
+
+; AUTHORS: g2hushi, g2husath
+
+(provide an-element a-sub-list shuffled)
 #| Re-implement the above functions.
 
  Use the implementation style of `the-length` shown in the `test` module below.
