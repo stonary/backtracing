@@ -47,4 +47,10 @@
   (displayln "testing change-bounded: 200 with <= 25 changes")
   (list-all (change-bounded 200 25)) 
   
+  (displayln "testing change-bounded: 0 with <= 25 changes")
+  (list-all (change-bounded 0 25)) 
+  
+  (displayln "testing change-bounded: 4 with <= 25 changes")
+  (list-all (change-bounded 0 25)) 
+  
   (equal? 450 (length (list-all (change 325)))))
