@@ -37,7 +37,7 @@
   
   (displayln "Testing pair-of: 0 pairs with empty list")
   (list-all (pair-of a c))
-)
+  )
 
 #| The list `ℓ` with `e` inserted somewhere. |#
 (define (with ℓ e)
@@ -55,14 +55,16 @@
   (list-all (with a d))
   (displayln "Testing with: 1 position with empty list")
   (list-all (with c d))
-)
+  )
 
 #| A list of the elements of list `ℓ` in some order.
    Hint: use `with`. |#
 
 (define (shuffled ℓ)
-  (if (empty? ℓ) (list)
-      (with (shuffled (rest ℓ)) (first ℓ))))
+  (match ℓ
+    [`() ℓ]
+    [`(,H . ,T) (with (shuffled T) H)]
+    [_ (fail)])) ; in case where l is not a list
 
 (module+ test
   (define l4 '(1 2 3 4))
@@ -74,10 +76,10 @@
   
   (displayln "Testing shuffled: 1 permutation with empty list")
   (list-all (shuffled c))
-
+  
   (displayln "Testing shuffled: 1 permutation with singliton")
   (list-all (shuffled (list d)))
-)
+  )
 
 #| A prime factor of positive natural number `n`, including repetitions. |#
 
@@ -139,4 +141,4 @@
   (list-all (prime-factor 3))
   (displayln "Testing prime number for 710518848894598995164656472095498960789946895931020")
   (list-all (prime-factor 710518848894598995164656472095498960789946895931020))
-)
+  )
