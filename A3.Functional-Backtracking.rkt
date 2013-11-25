@@ -19,25 +19,43 @@
 
 #| A two-element list with first element from list `A`, second from list `B`. |#
 (define (pair-of A B)
-  (list (an-element A) (an-element (rest B))))
+  (list (an-element A) (an-element B)))
 
 (module+ test
+  (displayln "Testing pair-of: 16 pairs")
   (define l1 '(csc phl soc imc))
   (define l2 '(108 324 494 499))
   
-  (list-all (pair-of l1 l2)))
+  (list-all (pair-of l1 l2))
+  (define a (list 1 2 3))
+  (define b (list 4 5 6))
+  (define c (list))
+  (define d 7)
+  
+  (displayln "Testing pair-of: 9 pairs")
+  (list-all (pair-of a b))
+  
+  (displayln "Testing pair-of: 0 pairs with empty list")
+  (list-all (pair-of a c))
+)
 
 #| The list `ℓ` with `e` inserted somewhere. |#
 (define (with ℓ e)
   (match ℓ
     [`(,H . ,T) (-< (cons e ℓ)
-                    (append (list (first ℓ))
-                            (with (rest ℓ) e)))]
-    [_ (list e)]))
+                    (cons H (with T e)))]
+    [`() (list e)]
+    [_ (fail)])) ; If l is not a list, fail
 
 (module+ test
+  (displayln "Testing with:")
   (define l3 '(1 2 3 4 5 6 7 8 9 10))
-  (list-all (with l3 'x)))
+  (list-all (with l3 'x))
+  (displayln "Testing with: 4 positions")
+  (list-all (with a d))
+  (displayln "Testing with: 1 position with empty list")
+  (list-all (with c d))
+)
 
 #| A list of the elements of list `ℓ` in some order.
    Hint: use `with`. |#
@@ -48,7 +66,18 @@
 
 (module+ test
   (define l4 '(1 2 3 4))
-  (list-all (shuffled l4)))
+  (displayln "Testing shuffle:")
+  (list-all (shuffled l4))
+  
+  (displayln "Testing shuffled: 6 permutations")
+  (list-all (shuffled a))
+  
+  (displayln "Testing shuffled: 1 permutation with empty list")
+  (list-all (shuffled c))
+
+  (displayln "Testing shuffled: 1 permutation with singliton")
+  (list-all (shuffled (list d)))
+)
 
 #| A prime factor of positive natural number `n`, including repetitions. |#
 
@@ -96,6 +125,18 @@
 
 
 (module+ test
+  (displayln "Testing prime number for 121")
   (list-all (prime-factor 121 2))
+  (displayln "Testing prime number for 14325")
   (list-all (prime-factor 14325 2))
-  (list-all (prime-factor 1299827 2)))
+  (displayln "Testing prime number for 1299827")
+  (list-all (prime-factor 1299827 2))
+  (displayln "Testing prime number for 2")
+  (list-all (prime-factor 2))
+  (displayln "Testing prime number for 4")
+  (list-all (prime-factor 4))
+  (displayln "Testing prime number for 3")
+  (list-all (prime-factor 3))
+  (displayln "Testing prime number for 710518848894598995164656472095498960789946895931020")
+  (list-all (prime-factor 710518848894598995164656472095498960789946895931020))
+)
